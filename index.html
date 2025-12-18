@@ -215,9 +215,8 @@
             height: 410px;
             border-radius: 50%;
             background: #1a1d29;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: grid;
+            place-items: center;  /* centers perfectly */
             font-size: 130px;
         }
 
@@ -633,27 +632,70 @@
             border-top: 1px solid rgba(255, 107, 107, 0.1);
             margin-top: 50px;
         }
+/* ==================== Responsive ==================== */
 
-        /* Responsive */
+/* Large laptops / small desktops */
         @media screen and (max-width: 1200px) {
             .hero {
                 grid-template-columns: 1fr;
                 padding: 60px 40px;
                 gap: 40px;
             }
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            .cert-grid {
+            .about-grid, .projects-grid, .cert-grid {
                 grid-template-columns: 1fr;
             }
             .contact-grid {
                 grid-template-columns: 1fr;
             }
         }
+
+/* Tablets */
+        @media screen and (max-width: 992px) {
+            .profile-circle {
+                width: 280px;
+                height: 280px;
+            }
+            .profile-image {
+                font-size: 80px;
+            }
+            .skills-categories {
+                display: block;
+            }
+            .stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+            .timeline-item, .project-card {
+                padding: 20px;
+            }
+        }
+
+/* Small tablets / large phones */
+        @media screen and (max-width: 768px) {
+            nav {
+                padding: 20px 20px;
+            }
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            form input, form textarea {
+                width: 100%;
+            }
+        }
+
+/* Mobile phones */
+        @media screen and (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            .hero-content h2 {
+                font-size: 28px;
+            }
+            .profile
 
     </style>
 </head>
