@@ -318,62 +318,51 @@
 
         /* Skills Section */
         .skills-container {
-            max-width: 1400px;
-            margin: 60px auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
         }
-
-        .skills-categories {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-            margin-top: 20px;
-        }
-
         .skill-category {
-            background: rgba(35, 38, 58, 0.6);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 107, 107, 0.1);
-            transition: all 0.3s;
-        }
+    flex: 1 1 300px; /* auto adjusts with screen width */
+    background: rgba(35, 38, 58, 0.6);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 107, 107, 0.1);
+}
 
-        .skill-category:hover {
-            border-color: #ff6b6b;
-            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.2);
-        }
+.skill-category-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #ff6b6b;
+}
 
-        .skill-category-title {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #ff6b6b;
-        }
+.skills-list {
+    display: flex;
+    flex-wrap: wrap; /* makes tags go to next line if needed */
+    gap: 10px;
+}
 
-        .skills-list {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
+.skill-tag {
+    padding: 8px 12px;
+    background: rgba(255, 107, 107, 0.1);
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+    white-space: nowrap; /* prevents breaking words */
+}
 
-        .skill-tag {
-            padding: 12px 20px;
-            background: rgba(255, 107, 107, 0.1);
-            border: 1px solid rgba(255, 107, 107, 0.3);
-            border-radius: 8px;
-            color: #ddd;
-            font-size: 14px;
-            text-align: center;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        .skill-tag:hover {
-            background: rgba(255, 107, 107, 0.2);
-            border-color: #ff6b6b;
-            transform: translateY(-3px);
-            color: #fff;
-        }
+/* Responsive: smaller screens */
+@media screen and (max-width: 768px) {
+    .skills-container {
+        flex-direction: column;
+    }
+    .skill-category {
+        flex: 1 1 100%;
+    }
+}
 
         /* Timeline / Experience */
         .experience {
