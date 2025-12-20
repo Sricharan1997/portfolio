@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thota Sricharan - Data Science Portfolio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+       
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f1117; color: #fff; line-height: 1.6; overflow-x: hidden; }
+        
+        nav { background: rgba(26, 29, 41, 0.95); backdrop-filter: blur(10px); padding: 25px 80px; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255, 107, 107, 0.1); box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
+        .logo { font-size: 22px; font-weight: 700; background: linear-gradient(135deg, #ff6b6b, #feca57); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-links { display: flex; gap: 35px; list-style: none; }
+        .nav-links a { color: #aaa; text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ff6b6b; transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: #fff; }
+        
+        .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; padding: 150px 80px 100px; align-items: center; min-height: 100vh; }
+        .hero-content { display: flex; flex-direction: column; }
+        .accent-line { width: 70px; height: 4px; background: linear-gradient(90deg, #ff6b6b, #feca57); margin-bottom: 25px; border-radius: 2px; box-shadow: 0 2px 10px rgba(255, 107, 107, 0.5); }
+        .hero-content h1 { font-size: 52px; font-weight: 300; margin-bottom: 10px; color: #ddd; }
+        .hero-content h1 span { display: block; font-weight: 700; background: linear-gradient(135deg, #fff, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-content h2 { font-size: 40px; font-weight: 700; margin-bottom: 20px; background: linear-gradient(135deg, #ff6b6b, #feca57); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-subtitle { color: #bbb; font-size: 16px; line-height: 1.8; margin-bottom: 40px; max-width: 600px; }
+        .hero-buttons { display: flex; gap: 20px; margin-bottom: 50px; flex-wrap: wrap; }
+        .btn-primary { padding: 16px 38px; background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: #fff; text-decoration: none; font-size: 15px; font-weight: 600; transition: all 0.3s; box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4); border-radius: 8px; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255, 107, 107, 0.6); }
+        .btn-secondary { padding: 16px 38px; background: transparent; color: #fff; text-decoration: none; font-size: 15px; font-weight: 600; border: 2px solid #fff; transition: all 0.3s; border-radius: 8px; }
+        .btn-secondary:hover { background: #fff; color: #1a1d29; }
+        .hero-image-container{position:relative;display:flex;justify-content:center;align-items:center}
+        .profile-circle{width:300px;height:300px;border-radius:50%;background:linear-gradient(135deg,#ff6b6b 0%,#feca57 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 15px 60px rgba(255,107,107,.4)}
+        .profile-image{width:270px;height:270px;border-radius:50%;background:#1a1d29;display:flex;align-items:center;justify-content:center;font-size:150px;font-weight:400;color:#ff6b6b}
+        .decorative-bracket{position:absolute;font-size:100px;color:rgba(255,107,107,.3);font-weight:100}
+        .bracket-left{left:-70px;top:50%;transform:translateY(-50%)}
+        .bracket-right{right:-70px;top:50%;transform:translateY(-50%) rotate(180deg)}
+        .section-title { font-size: 48px; font-weight: 700; margin-bottom: 35px; background: linear-gradient(135deg, #fff, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .about { padding: 100px 80px; }
+        .about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 80px; align-items: start; }
+        .about-text { color: #bbb; font-size: 16px; line-height: 1.9; margin-bottom: 30px; }
+        .highlight { color: #ff6b6b; font-weight: 700; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .stat-item { text-align: center; padding: 30px 20px; background: rgba(35, 38, 58, 0.6); backdrop-filter: blur(10px); border-radius: 12px; transition: all 0.3s; border: 1px solid rgba(255, 107, 107, 0.1); }
+        .stat-item:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(255, 107, 107, 0.3); border-color: #ff6b6b; }
+        .stat-number { font-size: 44px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+        .stat-number span { background: linear-gradient(135deg, #ff6b6b, #feca57); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .stat-label { color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .skills-container { margin-top: 60px; }
+        .skills-categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; margin-top: 30px; }
+        .skill-category { border-left: 4px solid #ff6b6b; padding-left: 25px; }
+        .skill-category-title { font-size: 22px; font-weight: 700; margin-bottom: 25px; color: #ff6b6b; }
+        .skill-category .skills-list{display:flex;flex-direction:column;gap:18px}
+        .skill-category .skill-tag{position:relative;padding:18px 25px;background:linear-gradient(90deg,rgba(255,107,107,.1) 0%,transparent 100%);border-left:3px solid #ff6b6b;font-size:15px;color:#fff;transition:.3s ease;cursor:pointer}
+        .skill-category .skill-tag:hover{background:linear-gradient(90deg,rgba(255,107,107,.2) 0%,rgba(255,107,107,.05) 100%);border-left-width:5px;padding-left:30px}
+/* Professional Experience Section */
+.timeline-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+    margin-bottom:20px
+}
+
+.experience-left{
+    max-width:75%
+}
+
+.timeline-title{
+    font-size:22px;
+    font-weight:700;
+    color:#ff6b6b;
+    margin-bottom:6px
+}
+
+.timeline-company{
+    font-size:15px;
+    color:#bbb;
+    margin-bottom:4px
+}
+
+.timeline-project{
+    font-size:14px;
+    color:#999;
+    margin-bottom:4px
+}
+
+.timeline-location{
+    font-size:13px;
+    color:#888
+}
+
+.timeline-date{
+    font-size:13px;
+    font-weight:600;
+    color:#ff6b6b;
+    background:rgba(255,107,107,0.12);
+    padding:8px 16px;
+    border-radius:20px;
+    white-space:nowrap
+}
+
+.experience-points{
+    margin-top:15px;
+    padding-left:20px
+}
+
+.experience-points li{
+    margin-bottom:10px;
+    line-height:1.6;
+    color:#ddd
+}
+
+.experience { padding: 100px 80px; background: rgba(9, 11, 15, 0.3); }
+.timeline { max-width: 1200px; margin: 60px auto 0; }
+.timeline-item {
+    padding: 30px;
+    background: rgba(6, 6, 9, 0.6);
+    border-radius: 12px;
+    border-left: 4px solid #ff6b6b;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.timeline-item:hover {
+    background: rgba(12, 13, 16, 0.8);
+    border-left-width: 5px;
+    transform: translateX(5px);
+    box-shadow: 0 15px 40px rgba(255, 107, 107, 0.2);
+}
+
+.timeline-item ul { margin-top: 15px; padding-left: 0; list-style: none; }
+.timeline-item li {
+    position: relative;
+    padding: 12px 20px;
+    background: linear-gradient(90deg, rgba(255,107,107,0.1) 0%, transparent 100%);
+    border-left: 3px solid #ff6b6b;
+    color: #fff;
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+.timeline-item li:hover {
+    background: linear-gradient(90deg, rgba(255,107,107,0.2) 0%, rgba(255,107,107,0.05) 100%);
+    border-left-width: 5px;
+    padding-left: 25px;
+}
+        .projects { padding: 100px 80px; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 35px; margin-top: 60px; }
+        .project-card { background: rgba(9, 10, 14, 0.6); backdrop-filter: blur(10px); padding: 40px; border-radius: 12px; transition: all 0.4s; border: 1px solid rgba(11, 6, 6, 0.1); }
+        .project-card:hover { border-color: #ff6b6b; transform: translateY(-10px); box-shadow: 0 20px 50px rgba(255, 107, 107, 0.3); }
+        .project-title { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+        .project-subtitle { color: #ff6b6b; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+        .project-highlights { list-style: none; padding: 0; }
+        .project-highlights li { color: #bbb; font-size: 14px; padding-left: 20px; position: relative; margin-bottom: 12px; line-height: 1.6; }
+        .project-highlights li::before { content: '▹'; position: absolute; left: 0; color: #ff6b6b; font-weight: bold; }
+        
+        .certifications { padding: 100px 80px; background: rgba(26, 29, 41, 0.3); }
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 60px; }
+        .cert-card { background: rgba(8, 8, 12, 0.6); backdrop-filter: blur(10px); padding: 35px; border-radius: 12px; border: 1px solid rgba(255, 107, 107, 0.1); text-align: center; transition: all 0.3s; }
+        .cert-card:hover { border-color: #ff6b6b; transform: translateY(-10px); box-shadow: 0 15px 40px rgba(255, 107, 107, 0.3); }
+        .cert-name { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #fff; line-height: 1.4; }
+        .cert-org { color: #888; font-size: 14px; margin-bottom: 8px; }
+        .cert-year { color: #ff6b6b; font-size: 13px; font-weight: 600; }
+        .cert-card p { color: #aaa; font-size: 13px; margin-top: 15px; line-height: 1.5; }
+        
+        .contact { padding: 100px 80px; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; margin-top: 60px; }
+        .contact-info-section { display: flex; flex-direction: column; gap: 25px; }
+        .contact-info-card { background: rgba(8, 8, 12, 0.6); backdrop-filter: blur(10px); padding: 30px; border-radius: 12px; border: 1px solid rgba(255, 107, 107, 0.1); transition: all 0.3s; }
+        .contact-info-card:hover { border-color: #ff6b6b; transform: translateX(10px); box-shadow: 0 10px 30px rgba(255, 107, 107, 0.2); }
+        .contact-info-card h3 { color: #ff6b6b; margin-bottom: 10px; font-size: 18px; }
+        .contact-info-card p { color: #bbb; }
+        .contact-info-card p a { color: #fff; text-decoration: none; transition: color 0.3s; }
+        .contact-info-card p a:hover { color: #ff6b6b; }
+        .contact-form { display: flex; flex-direction: column; gap: 20px; }
+        .contact-form input, .contact-form textarea { padding: 16px; border-radius: 8px; border: 1px solid rgba(255, 107, 107, 0.2); background: rgba(35, 38, 58, 0.6); color: #fff; font-size: 15px; font-family: inherit; transition: all 0.3s; }
+        .contact-form input::placeholder, .contact-form textarea::placeholder { color: #888; }
+        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: #ff6b6b; box-shadow: 0 0 20px rgba(255, 107, 107, 0.2); }
+        .contact-form textarea { resize: vertical; min-height: 150px; }
+        .contact-form button { padding: 16px 30px; background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: #fff; border: none; border-radius: 8px; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4); }
+        .contact-form button:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255, 107, 107, 0.6); }
+        
+        footer { text-align: center; padding: 40px; color: #888; border-top: 1px solid rgba(255, 107, 107, 0.1); font-size: 14px; }
+        
+        @media screen and (max-width: 1200px) {
+    .hero { 
+        grid-template-columns: 1fr; 
+        padding: 140px 60px 80px; 
+        text-align: center; 
+    }
+
+    .hero-image-container { 
+        order: -1; 
+        margin-bottom: 40px; 
+    }
+
+    .hero-content { 
+        align-items: center; 
+    }
+
+    .hero-subtitle { 
+        max-width: 100%; 
+    }
+
+    .about-grid, 
+    .contact-grid { 
+        grid-template-columns: 1fr; 
+    }
+
+    nav { 
+        padding: 20px 40px; 
+    }
+
+    .about, 
+    .experience, 
+    .projects, 
+    .certifications, 
+    .contact { 
+        padding: 80px 60px; 
+    }
+
+    /* ✅ EXPERIENCE FIX */
+    .timeline-header {
+        gap: 16px;
+    }
+}
+
+        
+       @media screen and (max-width: 992px) {
+    .profile-circle { width: 300px; height: 300px; }
+    .profile-image { width: 270px; height: 270px; font-size: 100px; }
+
+    .decorative-bracket { font-size: 70px; }
+    .bracket-left { left: -50px; }
+    .bracket-right { right: -50px; }
+
+    .stats { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+
+    .hero-content h1 { font-size: 42px; }
+    .hero-content h2 { font-size: 32px; }
+
+    /* ✅ EXPERIENCE FIX */
+    .timeline-title { font-size: 20px; }
+    .timeline-company { font-size: 14px; }
+}
+
+        
+        @media screen and (max-width: 768px) {
+    nav { 
+        padding: 20px; 
+        flex-direction: column; 
+        gap: 20px; 
+    }
+
+    .nav-links { 
+        flex-wrap: wrap; 
+        justify-content: center; 
+        gap: 20px; 
+    }
+
+    .hero { 
+        padding: 140px 30px 60px; 
+    }
+
+    .about, 
+    .experience, 
+    .projects, 
+    .certifications, 
+    .contact { 
+        padding: 60px 30px; 
+    }
+
+    .section-title { font-size: 36px; }
+
+    .profile-circle { width: 250px; height: 250px; }
+    .profile-image { width: 220px; height: 220px; font-size: 80px; }
+
+    .decorative-bracket { display: none; }
+
+    .timeline-item, 
+    .project-card { padding: 30px; }
+
+    .skills-categories { grid-template-columns: 1fr; }
+
+    /* ✅ EXPERIENCE FIX (VERY IMPORTANT) */
+    .timeline-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .timeline-date {
+        margin-top: 8px;
+    }
+
+    .experience-left {
+        max-width: 100%;
+    }
+}
+
+        
+        @media screen and (max-width: 576px) {
+    .hero-content h1 { font-size: 32px; }
+    .hero-content h2 { font-size: 24px; }
+
+    .hero-subtitle { font-size: 14px; }
+
+    .hero-buttons { 
+        flex-direction: column; 
+        width: 100%; 
+    }
+
+    .btn-primary, 
+    .btn-secondary { 
+        width: 100%; 
+        text-align: center; 
+    }
+
+    .profile-circle { width: 200px; height: 200px; }
+    .profile-image { width: 180px; height: 180px; font-size: 64px; }
+
+    .cert-grid { grid-template-columns: 1fr; }
+
+    /* ✅ EXPERIENCE FINAL POLISH */
+    .timeline-title { font-size: 18px; }
+    .timeline-company,
+    .timeline-project,
+    .timeline-location { font-size: 13px; }
+
+    .timeline-date {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">THOTA SRICHARAN</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certifications">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="accent-line"></div>
+            <h1>Hello, I'm <span>Thota Sricharan</span></h1>
+            <h2>Java Full Stack Developer | Graduate in Data Science</h2>
+            <p class="hero-subtitle">
+                Software Engineer with 3+ years of Java development experience and a Master's in Data Science. I build scalable enterprise billing solutions, design real-time data pipelines with Apache Kafka, and create interactive Tableau dashboards that transform complex healthcare data into actionable insights.
+            </p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn-primary">Contact Me</a>
+                <a href="#projects" class="btn-secondary">View Projects</a>
+            </div>
+        </div>
+        <div class="hero-image-container">
+            <div class="decorative-bracket bracket-left">{"{"}</div>
+            <div class="profile-circle">
+                <div class="profile-image">S</div>
+            </div>
+            <div class="decorative-bracket bracket-right">{"}"}</div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-grid">
+            <div>
+                <p class="about-text">
+                    Software Engineer and Data Science graduate with 3+ years of experience in Java full Stack, SQL, 
+                    and enterprise billing systems for healthcare clients. Skilled in <span class="highlight">Python</span>, 
+                    <span class="highlight">Big Data Analytics</span>, <span class="highlight">Tableau</span>, 
+                    and <span class="highlight">Apache Kafka</span>, with academic training in machine learning, visual analytics, 
+                    probability & statistics, and advanced database systems.
+                </p>
+                <p class="about-text">
+                    Adept at delivering scalable, data-driven solutions by combining software engineering expertise with 
+                    analytical and problem-solving skills. Experienced in developing and maintaining enterprise applications, 
+                    performing complex data analysis, and implementing custom workflows that improve efficiency and client satisfaction.
+                </p>
+                <p class="about-text">
+                    Currently pursuing a Master's in Data Science at Rowan University, focusing on data mining, 
+                    big data analytics, and predictive modeling, while applying cutting-edge techniques to real-world challenges.
+                </p>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">3<span>+</span></div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15<span>%</span></div>
+                    <div class="stat-label">Translated client requirements into scalable solutions, reducing change requests</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">25<span>%</span></div>
+                    <div class="stat-label">Streamlined documentation and defect-tracking processes, cutting onboarding time for new developers</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="skills-container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-categories">
+                <div class="skill-category">
+                    <div class="skill-category-title">Programming & Analytics</div>
+                    <div class="skills-list">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">AWS</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Data Science & Big Data</div>
+                    <div class="skills-list">
+                        <span class="skill-tag">Data Mining</span>
+                        <span class="skill-tag">Big Data Analytics</span>
+                        <span class="skill-tag">Apache Kafka</span>
+                        <span class="skill-tag">Predictive Modeling</span>
+                        <span class="skill-tag">Statistical Analysis</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Visualization & Tools</div>
+                    <div class="skills-list">
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">Jupyter</span>
+                        <span class="skill-tag">Eclipse</span>
+                        <span class="skill-tag">Visual Studio</span>
+                        <span class="skill-tag">PyCharm</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Databases & Platforms</div>
+                    <div class="skills-list">
+                        <span class="skill-tag">SQL Server</span>
+                        <span class="skill-tag">Oracle</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Core Competencies</div>
+                    <div class="skills-list">
+                        <span class="skill-tag">Data Analysis</span>
+                        <span class="skill-tag">Visualization</span>
+                        <span class="skill-tag">Client Communication</span>
+                        <span class="skill-tag">Billing Systems</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="experience">
+    <h2 class="section-title">Professional Experience</h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+
+            <!-- Header -->
+            <div class="timeline-header">
+                <div class="experience-left">
+                    <h3 class="timeline-title">Software Engineer (Java Developer)</h3>
+                    <div class="timeline-company">
+                        HCL Technologies · Client: Thryve Digital
+                    </div>
+                    <div class="timeline-project">
+                        Project: PeopleSoft Billing (PPS)
+                    </div>
+                    <div class="timeline-location">
+                        Hyderabad, India
+                    </div>
+                </div>
+
+                <div class="timeline-date">
+                    Feb 2020 – Dec 2023
+                </div>
+            </div>
+
+            <!-- Responsibilities -->
+            <ul class="experience-points">
+                <li>Developed and maintained Java-based billing applications for Highmark networks, ensuring compliance with business requirements and on-time delivery.</li>
+                <li>Collaborated with clients to gather requirements and convert them into scalable technical solutions, reducing change requests by 15%.</li>
+                <li>Performed SQL-based data analysis to resolve complex billing issues, reducing defect rate and improving system reliability.</li>
+                <li>Streamlined documentation and defect-tracking processes, cutting onboarding time for new developers by 25%.</li>
+                <li>Partnered with cross-functional teams to implement custom billing workflows, improving efficiency and client satisfaction.</li>
+            </ul>
+
+        </div>
+    </div>
+</section>
+
+
+    <section id="projects" class="projects">
+        <h2 class="section-title">Academic & Professional Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-title">Big Data Pipeline with Kafka</div>
+                <div class="project-subtitle">Rowan University – Data Mining & Analytics, 2024</div>
+                <ul class="project-highlights">
+                    <li>Built a real-time big data pipeline using Apache Kafka to ingest, process, and analyze large-scale gold sales datasets.</li>
+                    <li>Applied data mining techniques to identify hidden patterns and actionable insights from streaming data.</li>
+                    <li>Integrated Kafka with Python-based analytics workflows for efficient large-scale data exploration.</li>
+                    <li>Demonstrated pipeline scalability and fault-tolerance in a distributed environment.</li>
+                </ul>
+            </div>
+            <div class="project-card">
+                <div class="project-title">2018 VAST Challenge Mini-Challenge 1</div>
+                <div class="project-subtitle">Rowan University – Visual Analytics, 2024</div>
+                <ul class="project-highlights">
+                    <li>Conducted advanced data analysis using Python and Tableau, focusing on visual analytics, anomaly detection, and social network interactions.</li>
+                    <li>Designed interactive Tableau dashboards for multi-source data exploration.</li>
+                    <li>Produced a comprehensive report with actionable insights, showcasing ability to tackle real-world data challenges.</li>
+                </ul>
+            </div>
+            <div class="project-card">
+                <div class="project-title">Capstone Project: Efficient Modular Adders with Reversible Circuits</div>
+                <div class="project-subtitle">VLSI Design</div>
+                <ul class="project-highlights">
+                    <li>Designed reversible circuits allowing retrieval of inputs from outputs without data loss.</li>
+                    <li>Enhanced efficiency by reusing logic gates across modular adder designs.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications" class="certifications">
+        <h2 class="section-title">Education & Certifications</h2>
+        <div class="cert-grid">
+            <div class="cert-card">
+                <div class="cert-name">Master of Science in Data Science</div>
+                <div class="cert-org">Rowan University, Glassboro, NJ</div>
+                <div class="cert-year">Expected 2025</div>
+                <p>Coursework: Data Mining, Big Data Analytics, Visual Analytics, Probability & Statistics, Advanced Database Systems</p>
+            </div>
+            <div class="cert-card">
+                <div class="cert-name">Bachelor of Technology in Electronics and Communication Engineering</div>
+                <div class="cert-org">Christu Jyothi Institute of Technology and Science (JNTUH)</div>
+                <div class="cert-year">2019</div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-name">AWS Certified Cloud Practitioner & AWS Certified Solutions Architect – Associate</div>
+                <div class="cert-year">2023</div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-name">Tableau Desktop Specialist </div>
+                <div class="cert-org">Rowan University, Glassboro, NJ</div>
+                <div class="cert-year">Expected 2025</div>
+            </div>
+        </div>
+    </section>
+
+ <section id="contact" class="contact">
+        <h2 class="section-title">Contact Me</h2>
+        <div class="contact-wrapper">
+            <div class="contact-grid">
+                <div class="contact-info-section">
+                    <div class="contact-info-card">
+                        <h3>Email</h3>
+                        <p><a href="mailto:thotasricharan97@gmail.com">thotasricharan97@gmail.com</a></p>
+                    </div>
+                    <div class="contact-info-card">
+                        <h3>Phone</h3>
+                        <p><a href="tel:+18565267544">+1 (856)-526-7544</a></p>
+                    </div>
+                    <div class="contact-info-card">
+                        <h3>LinkedIn</h3>
+                        <p><a href="https://linkedin.com/in/sricharan-thota-99369b198" target="_blank">linkedin.com/in/sricharan-thota-99369b198</a></p>
+                    </div>
+                </div>
+                <div>
+                    <form action="file:///C:/Users/thota/OneDrive/Desktop/Thota%20Sricharan%20Portfolio.html#" method="POST" style="display:flex;flex-direction:column;gap:15px;">
+                        <input type="text" name="name" placeholder="Your Name" required="" style="padding:15px;border-radius:8px;border:none;">
+                        <input type="email" name="email" placeholder="Your Email" required="" style="padding:15px;border-radius:8px;border:none;">
+                        <textarea name="message" rows="6" placeholder="Your Message" required="" style="padding:15px;border-radius:8px;border:none;"></textarea>
+                        <button type="submit" style="padding:16px 30px;background:#ff6b6b;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
